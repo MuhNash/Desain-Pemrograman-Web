@@ -1,0 +1,2 @@
+flex-wrap: wrap mulai bekerja setelah lebar sebesar 607 pixel, Ketika lebar menjadi 606 pixel maka
+wrap akan bekerja dan memindahkan konten ke Bawah agar responsive terhadap ukuran layer web nya
