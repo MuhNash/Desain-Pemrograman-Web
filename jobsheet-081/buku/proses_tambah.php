@@ -1,5 +1,6 @@
 <?php
 session_start();
+require __DIR__ . '/../includes/koneksi.php';
 
 $judul = trim($_POST['judul'] ?? '');
 $pengarang = trim($_POST['pengarang'] ?? '');
@@ -20,7 +21,7 @@ if ($pengarang === '') {
 if (!is_numeric($tahun) || $tahun < 1900 || $tahun > 2026) {
     $errors[] = "Tahun harus di antara 1900-2026.";
 }
-if (preg_match("/^[A-Za-z0-9]+$/", $isbn)) {
+if (preg_match('/[^a-zA-Z0-9]/', $isbn)) {
     $errors[] = "ISBN harus berisi angka dan huruf";
 }
 if (!is_numeric($stok) || $stok < 0) {
@@ -37,14 +38,20 @@ if (!isset($_SESSION['buku'])) {
     $_SESSION['buku'] = [];
 }
 
-$_SESSION['buku'][] = [
+$stmt = $pdo->prepare(
+    "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
+    VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
+    RETURNING id"
+);
+
+$stmt->execute([
     'judul' => $judul,
     'pengarang' => $pengarang,
     'tahun' => (int) $tahun,
     'isbn' => $isbn,
     'stok' => (int) $stok,
-    'kategori' => $kategori,
-];
+    'kategori' => $kategori
+]);
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
 header('Location: list.php');
