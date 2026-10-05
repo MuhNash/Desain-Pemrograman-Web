@@ -10,8 +10,11 @@ $errors = [];
 if ($nama === '') {
     $errors[] = "Nama wajib diisi.";
 }
-if ($noAnggota === '') {
+if ($noAnggota === '' || !is_numeric($noAnggota)) {
     $errors[] = "No. Anggota wajib diisi.";
+}
+if (!is_numeric($noHp) || strlen($noHp < 12)) {
+    $errors[] = "No HP minimal 12 angka.";
 }
 
 if (!empty($errors)) {
