@@ -35,6 +35,10 @@ unset($_SESSION['flash']);
                     <input type="number" id="stok" name="stok" min="0" required>
                 </p>
                 <p>
+                    <label for="harga">harga</label><br>
+                    <input type="number" id="harga" name="harga" min="0" required>
+                </p>
+                <p>
                     <label for="kategori">Kategori</label><br>
                     <select id="kategori" name="kategori">
                         <option value="fiksi">Fiksi</option>

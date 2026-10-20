@@ -6,6 +6,7 @@ $nama = trim($_POST['nama'] ?? '');
 $noAnggota = trim($_POST['no_anggota'] ?? '');
 $alamat = trim($_POST['alamat'] ?? '');
 $noHp = trim($_POST['no_hp'] ?? '');
+$email = trim($_POST['no_anggota'] ?? '');
 
 $errors = [];
 if ($nama === '') {
@@ -13,6 +14,9 @@ if ($nama === '') {
 }
 if ($noAnggota === '') {
     $errors[] = "No. Anggota wajib diisi.";
+}
+if ($email === '') {
+    $errors[] = "Email wajib diisi.";
 }
 
 if (!empty($errors)) {

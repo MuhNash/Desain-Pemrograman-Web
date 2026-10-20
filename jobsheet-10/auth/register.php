@@ -34,6 +34,10 @@ unset($_SESSION['flash']);
                     <input type="password" id="password" name="password" required minlength="6">
                 </p>
                 <p>
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email" name="email">
+                </p>
+                <p>
                     <button type="submit">Daftar</button>
                 </p>
             </form>

@@ -4,7 +4,8 @@ include __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/koneksi.php';
 
 $totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
-$totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn()
+$totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
+$totalPinjam = (int) $pdo->query("SELECT COUNT(*) FROM peminjaman")->fetchColumn();
 ?>
 
 <section>
@@ -22,8 +23,8 @@ $totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn()
         <p><?php echo $totalAnggota; ?></p>
     </article>
     <article>
-        <h3>Sdeang Berjalan</h3>
-        <p>0</p>
+        <h3>Sedang Dipinjam</h3>
+        <p><?php echo $totalPinjam; ?></p>
     </article>
 </section>
 

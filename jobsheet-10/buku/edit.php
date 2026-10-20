@@ -52,6 +52,10 @@ if (!$buku) {
                     <input type="number" id="stok" name="stok" min="0" value="<?php echo $buku['stok']; ?>" required>
                 </p>
                 <p>
+                    <label for="harga">Harga</label><br>
+                    <input type="number" id="harga" name="harga" min="0" value="<?php echo $buku['harga']; ?>" required>
+                </p>
+                <p>
                     <label for="kategori">Kategori</label><br>
                     <select id="kategori" name="kategori">
                         <?php foreach (['fiksi' => 'Fiksi', 'non-fiksi' => 'Non-Fiksi', 'referensi' => 'Referensi'] as $value => $label): ?>

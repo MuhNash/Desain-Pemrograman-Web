@@ -48,6 +48,10 @@ if (!$anggota) {
                     <input type="text" id="no_hp" name="no_hp" value="<?php echo $anggota['no_hp']; ?>">
                 </p>
                 <p>
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email" name="email" value="<?php echo $anggota['email']; ?>">
+                </p>
+                <p>
                     <button type="submit">Update</button>
                 </p>
             </form>

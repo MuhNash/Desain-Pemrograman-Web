@@ -25,6 +25,7 @@ async function muatDaftarBuku() {
                 "<td>" + buku.tahun + "</td>" +
                 "<td>" + buku.isbn + "</td>" +
                 "<td>" + buku.stok + "</td>" +
+                "<td>" + buku.harga + "</td>" +
                 "<td>" +
                 "<button type=\"button\">Edit</button> " +
                 "<button type=\"button\" class=\"btn-hapus\">Hapus</button>" +

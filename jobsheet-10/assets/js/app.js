@@ -27,6 +27,20 @@ function initHapusConfirm() {
     });
 }
 
+function initPinjamConfirm() {
+    document.addEventListener("submit", function (e) {
+        const form = e.target;
+        if (!form.classList.contains("form-pinjaman")) return;
+
+        const row = form.closest("tr");
+        const judul = row ? row.querySelector("td").textContent.trim() : "buku ini";
+        const yakin = confirm("Pinjam buku \"" + judul + "\"? Stok akan berkurang satu.");
+        if (!yakin) {
+            e.preventDefault();
+        }
+    });
+}
+
 // ===== Filter/pencarian tabel real-time =====
 function initTableFilter() {
     const input = document.getElementById("search-input");
@@ -112,6 +126,17 @@ function initValidasiForm() {
             }
         }
 
+        const harga = form.querySelector("[name='harga']");
+        if (harga) {
+            const nilai = parseInt(harga.value, 10);
+            if (isNaN(nilai) || nilai < 0) {
+                tampilkanError(harga, "Harga tidak boleh negatif.");
+                valid = false;
+            } else {
+                hapusError(harga);
+            }
+        }
+
         if (!valid) {
             e.preventDefault();
         }
@@ -121,6 +146,7 @@ function initValidasiForm() {
 document.addEventListener("DOMContentLoaded", function () {
     initNavToggle();
     initHapusConfirm();
+    initPinjamConfirm();
     initTableFilter();
     initValidasiForm();
 });

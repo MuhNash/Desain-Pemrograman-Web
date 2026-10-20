@@ -42,7 +42,7 @@ a:hover {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  width: 264px;
+  width: 250px;
   min-height: 100vh;
   padding: 2rem 1.25rem 1.5rem;
   color: #fff;
@@ -67,7 +67,7 @@ a:hover {
   margin-top: 1rem;
   padding: 0.8rem 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  text-align: center;
   background: var(--sidebar-soft);
 }
 
@@ -101,6 +101,7 @@ a:hover {
   border-radius: 8px;
   color: #d5deea;
   font-weight: 550;
+  text-align: center;
   transition: background-color 150ms ease, color 150ms ease;
 }
 
@@ -130,7 +131,7 @@ a:hover {
 main {
   width: min(100% - 264px, 1440px);
   min-height: calc(100vh - 5rem);
-  margin: 0 0 0 264px;
+  margin: 0 0 0 250px;
   padding: 2.5rem clamp(1.25rem, 4vw, 3.5rem);
 }
 
@@ -218,8 +219,17 @@ tbody tr:hover {
   background: #f2f7ff;
 }
 
-td form.form-hapus {
+td form.form-hapus,
+td form.form-pinjaman {
   display: inline-block;
+}
+
+td form.form-pinjaman select {
+  width: auto;
+  max-width: 12rem;
+  margin-right: 0.35rem;
+  padding: 0.4rem;
+  font-size: 0.85rem;
 }
 
 td button,
@@ -234,13 +244,21 @@ td a.btn-edit {
   cursor: pointer;
 }
 
-td button:first-of-type,
 td a.btn-edit {
   background: #e5a23c;
 }
 
-td button:last-of-type {
+td button.btn-pinjam {
   background: #df5e5b;
+}
+
+td button.btn-hapus {
+  background: #df5e5b;
+}
+
+td button.btn-pinjam.btn-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* ===== Form ===== */

@@ -27,7 +27,7 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
             <h1>SIMPUS-Mini</h1>
             <div class="user-panel">
                 <?php if ($sudahLogin): ?>
-                    <span class="user-label">Masuk sebagai</span>
+                    <span class="user-label">Username</span>
                     <span class="user-name"><?php echo $_SESSION['nama']; ?></span>
                 <?php else: ?>
                     <span class="user-label">Status pengguna</span>
@@ -35,7 +35,7 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
                 <?php endif; ?>
             </div>
         </div>
-        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
+        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9775;</button>
         <nav>
             <ul>
                 <li><a href="<?php echo $base; ?>index.php">Beranda</a></li>

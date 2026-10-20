@@ -7,6 +7,7 @@ require __DIR__ . '/../includes/koneksi.php';
 $nama = trim($_POST['nama'] ?? '');
 $username = trim($_POST['username'] ?? '');
 $password = $_POST['password'] ?? '';
+$email = $_POST['email'] ?? '';
 
 $errors = [];
 if ($nama === '') {
@@ -17,6 +18,9 @@ if ($username === '') {
 }
 if (strlen($password) < 6) {
     $errors[] = "Password minimal 6 karakter.";
+}
+if ($email === '') {
+    $errors[] = "Email wajib diisi.";
 }
 
 if (!empty($errors)) {
@@ -40,6 +44,7 @@ $stmt->execute([
     'nama' => $nama,
     'username' => $username,
     'password' => password_hash($password, PASSWORD_DEFAULT),
+    'email' => $email,
 ]);
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Registrasi berhasil, silakan login.'];

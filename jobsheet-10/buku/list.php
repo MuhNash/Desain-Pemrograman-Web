@@ -6,6 +6,9 @@ require __DIR__ . '/../includes/koneksi.php';
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
+$anggotaStmt = $pdo->query("SELECT id, nama, no_anggota FROM anggota ORDER BY nama ASC");
+$daftarAnggota = $anggotaStmt->fetchAll(PDO::FETCH_ASSOC);
+
 $perPage = 5;
 $page = max(1, (int) ($_GET['page'] ?? 1));
 $offset = ($page - 1) * $perPage;
@@ -54,13 +57,15 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
                         <th>Pengarang</th>
                         <th>Tahun</th>
                         <th>Stok</th>
+                        <th>Harga</th>
                         <th>Aksi</th>
+                        <th>Peminjaman</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($daftarBuku)): ?>
                     <tr>
-                        <td colspan="5">Tidak ada data buku yang cocok.</td>
+                        <td colspan="6">Tidak ada data buku yang cocok.</td>
                     </tr>
                     <?php else: ?>
                         <?php foreach ($daftarBuku as $buku): ?>
@@ -69,11 +74,29 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
                             <td><?php echo $buku['pengarang']; ?></td>
                             <td><?php echo $buku['tahun']; ?></td>
                             <td><?php echo $buku['stok']; ?></td>
+                            <td><?php echo $buku['harga']; ?></td>
                             <td>
                                 <a href="edit.php?id=<?php echo $buku['id']; ?>" class="btn-edit">Edit</a>
                                 <form class="form-hapus" method="post" action="hapus.php">
                                     <input type="hidden" name="id" value="<?php echo $buku['id']; ?>">
                                     <button type="submit" class="btn-hapus">Hapus</button>
+                                </form>
+                            </td>
+                            <td style="text-align: right;"><form class="form-pinjaman" method="post" action="proses_pinjam.php">
+                                    <input type="hidden" name="id" value="<?php echo $buku['id']; ?>">
+                                    <?php if ((int) $buku['stok'] > 0 && !empty($daftarAnggota)): ?>
+                                        <select name="id_anggota" aria-label="Pilih anggota untuk peminjaman" required>
+                                            <option value="">Pilih anggota</option>
+                                            <?php foreach ($daftarAnggota as $anggota): ?>
+                                                <option value="<?php echo (int) $anggota['id']; ?>"><?php echo htmlspecialchars($anggota['nama'] . ' (' . $anggota['no_anggota'] . ')', ENT_QUOTES, 'UTF-8'); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <button type="submit" class="btn-pinjam">Pinjam</button>
+                                    <?php elseif ((int) $buku['stok'] > 0): ?>
+                                        <button type="button" class="btn-pinjam btn-disabled" disabled>Belum ada anggota</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn-pinjam btn-disabled" disabled>Stok habis</button>
+                                    <?php endif; ?>
                                 </form>
                             </td>
                         </tr>
